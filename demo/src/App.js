@@ -98,7 +98,8 @@ function App() {
       </ScrollSenseHeader>
 
         <div className="app-layout">
-          <aside className="settings-panel">            
+          <aside className="settings-panel">
+            <h3 className="settings-title">Header Settings</h3>
             <div className="setting-group">
               <label className="setting-label">Behavior</label>
               {behaviorOptions.map((option) => (

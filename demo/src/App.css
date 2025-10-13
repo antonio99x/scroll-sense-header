@@ -81,6 +81,14 @@ body {
   z-index: 100;
 }
 
+.settings-title {
+  margin: 0 0 1.5rem 0;
+  color: #495057;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+}
+
 .settings-panel h3 {
   margin: 0 0 1.5rem 0;
   color: #495057;
@@ -249,12 +257,16 @@ body {
     position: relative;
     width: 100%;
     height: auto;
-    max-height: 50vh;
-    overflow-y: auto;
+    padding: 2rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+    order: 1; /* Place before main content */
+    background: #f8f9fa;
   }
 
   .main-content {
     margin-left: 0;
+    order: 2; /* Place after settings panel */
   }
 
   .header-content {
@@ -263,8 +275,8 @@ body {
     padding: 1rem;
   }
 
-  .nav-list {
-    gap: 1rem;
+  .navigation {
+    display: none; /* Hide navigation on mobile */
   }
 
   .logo {
@@ -279,23 +291,49 @@ body {
     font-size: 1.1rem;
   }
 
+  .section {
+    padding: 3rem 0;
+    min-height: 80vh;
+  }
+
+  .settings-title {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .nav-list {
-    flex-direction: column;
-    gap: 0.5rem;
+  .header-content {
+    padding: 0.75rem;
   }
 
-  .nav-link {
-    padding: 0.75rem 1rem;
+  .logo {
+    font-size: 1.3rem;
   }
 
   .settings-panel {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   .setting-group {
     margin-bottom: 1rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .container h2 {
+    font-size: 1.8rem;
+  }
+
+  .container p {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+    min-height: 70vh;
   }
 }
