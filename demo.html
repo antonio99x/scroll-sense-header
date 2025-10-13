@@ -10,6 +10,9 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
+    <!-- Load RequireJS for AMD support -->
+    <script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
+    
     <!-- Load our component from CDN -->
     <script src="https://unpkg.com/react-scroll-sense-header@latest/dist/index.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/react-scroll-sense-header@latest/dist/styles.css">
@@ -123,11 +126,9 @@
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
         
-        // Get the ScrollSenseHeader component
-        const ScrollSenseHeader = window.ReactScrollSenseHeader?.ScrollSenseHeader || window.ScrollSenseHeader;
+        // Load ScrollSenseHeader using AMD
+        let ScrollSenseHeader = null;
         
-        console.log('ScrollSenseHeader component:', ScrollSenseHeader);
-
         function SimpleDemo() {
             const headerRef = useRef();
             const [scrollY, setScrollY] = useState(0);
@@ -245,8 +246,15 @@
             );
         }
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<SimpleDemo />);
+        // Load ScrollSenseHeader using AMD
+        require(['index'], function(index) {
+            ScrollSenseHeader = index.ScrollSenseHeader;
+            console.log('ScrollSenseHeader loaded:', ScrollSenseHeader);
+            
+            // Re-render the component once ScrollSenseHeader is loaded
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(<SimpleDemo />);
+        });
     </script>
 </body>
 </html>
