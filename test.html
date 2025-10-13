@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Scroll Sense Header - Quick Test</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .test-header {
+            background-color: #ffffff;
+            border-bottom: 2px solid #e0e0e0;
+            padding: 1rem 2rem;
+            position: relative;
+            z-index: 1000;
+            /* transition: top 0.3s ease-in-out, box-shadow 0.3s ease-in-out; */
+        }
+        
+        .test-header--sticky {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-header--sticky-transition {
+            transition: top 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .test-header--hidden {
+            box-shadow: none;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .test-button {
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        .test-button:hover {
+            opacity: 0.8;
+        }
+        
+        main {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .section:nth-child(even) {
+            background-color: #ffffff;
+        }
+        
+        .instructions {
+            background-color: #e9ecef;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header" id="header">
+        <div class="header-content">
+            <h1 style="margin: 0; color: #333;">Quick Test Header</h1>
+            <div>
+                <button class="test-button" onclick="resetHeader()">Reset</button>
+                <button class="test-button" onclick="showStatus()">Status</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status" id="status" style="display: none;">
+        Normal
+    </div>
+
+    <main>
+        <div class="instructions">
+            <h2>🧪 Quick Package Test</h2>
+            <p><strong>Instructions:</strong> Scroll down to test the sticky header functionality!</p>
+            <ol style="text-align: left; display: inline-block;">
+                <li>Scroll down slowly - header should become sticky</li>
+                <li>Continue scrolling - header should hide</li>
+                <li>Scroll up - header should reappear</li>
+                <li>Scroll to top - header should return to normal</li>
+            </ol>
+        </div>
+
+        <!-- Generate content for scrolling -->
+        <div id="content"></div>
+        
+        <div class="section" style="background-color: #d4edda; text-align: center;">
+            <h3>✅ Test Complete!</h3>
+            <p>If the header behaved as expected, your package logic is working correctly!</p>
+        </div>
+    </main>
+
+    <script>
+        // Simulate the package logic
+        let lastScrollY = 0;
+        const header = document.getElementById('header');
+        const status = document.getElementById('status');
+        
+        function updateStatus(text) {
+            status.textContent = text;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 2000);
+        }
+        
+        function resetHeader() {
+            header.style.top = '0';
+            header.classList.remove('test-header--sticky', 'test-header--sticky-transition', 'test-header--hidden');
+            document.body.style.paddingTop = '0';
+            updateStatus('Reset to Normal');
+        }
+        
+        function showStatus() {
+            const isSticky = header.classList.contains('test-header--sticky');
+            const isHidden = header.classList.contains('test-header--hidden');
+            updateStatus(`Sticky: ${isSticky}, Hidden: ${isHidden}`);
+        }
+        
+        function handleScroll() {
+            const currentScrollY = window.scrollY;
+            const headerHeight = header.clientHeight || 0;
+            
+            if (currentScrollY > lastScrollY) {
+                // Scroll down
+                if (currentScrollY > headerHeight) {
+                    header.style.top = `-${headerHeight}px`;
+                    if (!header.classList.contains('test-header--hidden')) {
+                        header.classList.add('test-header--hidden');
+                    }
+                }
+            } else if (currentScrollY < lastScrollY) {
+                // Scroll up
+                header.style.top = '0';
+                if (header.classList.contains('test-header--hidden')) {
+                    header.classList.remove('test-header--hidden');
+                }
+            }
+            
+            if (currentScrollY > headerHeight) {
+                // Add sticky class
+                if (!header.classList.contains('test-header--sticky')) {
+                    header.classList.add('test-header--sticky');
+                    setTimeout(() => {
+                        header.classList.add('test-header--sticky-transition');
+                    }, 300);
+                    document.body.style.paddingTop = `${headerHeight}px`;
+                }
+            } else if (currentScrollY < 3) {
+                // Remove sticky class
+                if (header.classList.contains('test-header--sticky')) {
+                    header.classList.remove('test-header--sticky');
+                    header.classList.remove('test-header--sticky-transition');
+                    document.body.style.paddingTop = '0';
+                }
+            }
+            
+            lastScrollY = currentScrollY;
+        }
+        
+        // Generate test content
+        const contentDiv = document.getElementById('content');
+        for (let i = 0; i < 25; i++) {
+            const section = document.createElement('div');
+            section.className = 'section';
+            section.innerHTML = `
+                <h3>Section ${i + 1}</h3>
+                <p>This is test content for section ${i + 1}. The header should become sticky 
+                when you scroll down past the header height and hide when you continue scrolling down. 
+                When you scroll back up, it should reappear smoothly.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            `;
+            contentDiv.appendChild(section);
+        }
+        
+        // Add scroll listener
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    </script>
+</body>
+</html>

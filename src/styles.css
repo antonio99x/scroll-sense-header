@@ -1,0 +1,49 @@
+.scroll-sense-header {
+  position: relative;
+  z-index: 1000;
+  background-color: transparent;
+}
+
+.scroll-sense-header--sticky {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: transparent;
+}
+
+/* Box shadow presets */
+.scroll-sense-header--box-shadow-light.scroll-sense-header--sticky:not(.scroll-sense-header--hidden) {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.scroll-sense-header--box-shadow-medium.scroll-sense-header--sticky:not(.scroll-sense-header--hidden) {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.scroll-sense-header--box-shadow-heavy.scroll-sense-header--sticky:not(.scroll-sense-header--hidden) {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.scroll-sense-header--box-shadow-custom.scroll-sense-header--sticky:not(.scroll-sense-header--hidden) {
+  /* Custom box shadow will be applied via inline style */
+}
+
+.scroll-sense-header--sticky-transition {
+  transition: top var(--transition-duration, 0.3s) ease-in-out, box-shadow var(--transition-duration, 0.3s) ease-in-out;
+}
+
+.scroll-sense-header--hidden {
+  box-shadow: none !important;
+}
+
+.scroll-sense-header--always-fixed {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: transparent;
+}
+
+.scroll-sense-header--always-top {
+  position: relative;
+  background-color: transparent;
+}

@@ -1,0 +1,45 @@
+{
+  "name": "react-scroll-sense-header",
+  "version": "1.0.0",
+  "description": "A React component that provides sticky header functionality with scroll-based hiding and showing",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && copyfiles src/styles.css dist/ --flat",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "nextjs",
+    "sticky",
+    "header",
+    "scroll",
+    "typescript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/react-scroll-sense-header.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/react-scroll-sense-header/issues"
+  },
+  "homepage": "https://github.com/yourusername/react-scroll-sense-header#readme"
+}
