@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 import { ScrollSenseHeaderProps, ScrollState, ScrollSenseHeaderRef } from './types';
-import './styles.css';
 
 const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProps>(
   (
