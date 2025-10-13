@@ -284,7 +284,7 @@
         const { useState, useRef, useEffect } = React;
         
         // Get the ScrollSenseHeader component from the global scope
-        const ScrollSenseHeader = window.ReactScrollSenseHeader?.ScrollSenseHeader || window.ScrollSenseHeader;
+        const ScrollSenseHeader = window.ScrollSenseHeader;
         
         console.log('Available globals:', Object.keys(window).filter(k => k.includes('ScrollSense')));
         console.log('ScrollSenseHeader component:', ScrollSenseHeader);
