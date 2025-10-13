@@ -20,11 +20,20 @@ A React component that provides intelligent header behavior based on scroll posi
 npm install react-scroll-sense-header
 ```
 
+## CSS Import
+
+You need to import the CSS styles in your application:
+
+```tsx
+import 'react-scroll-sense-header/dist/styles.css';
+```
+
 ## Usage
 
 ```tsx
 import React, { useRef } from 'react';
 import { ScrollSenseHeader, ScrollSenseHeaderRef } from 'react-scroll-sense-header';
+import 'react-scroll-sense-header/dist/styles.css';
 
 function App() {
   const headerRef = useRef<ScrollSenseHeaderRef>(null);
