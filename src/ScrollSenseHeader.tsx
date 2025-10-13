@@ -53,6 +53,28 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
       const header = headerRef.current;
       if (!header) return;
 
+      // Reset component state when behavior changes
+      const resetComponent = () => {
+        header.style.top = '0';
+        header.classList.remove(
+          'scroll-sense-header--sticky',
+          'scroll-sense-header--sticky-transition',
+          'scroll-sense-header--hidden',
+          'scroll-sense-header--always-fixed',
+          'scroll-sense-header--always-top'
+        );
+        document.body.style.paddingTop = '0';
+        setScrollState({
+          isSticky: false,
+          isHidden: false,
+          isTransitioning: false,
+        });
+        setLastScrollY(window.scrollY);
+      };
+
+      // Reset first to clean up any previous behavior
+      resetComponent();
+
       const headerHeight = header.clientHeight || 0;
       const threshold = hideThreshold || headerHeight;
 
