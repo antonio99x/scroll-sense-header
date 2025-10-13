@@ -1,7 +1,7 @@
 {
   "name": "react-scroll-sense-header",
   "version": "1.0.5",
-  "description": "A React component that provides sticky header functionality with scroll-based hiding and showing",
+  "description": "A React component that provides intelligent header behavior based on scroll position. The header can hide/show on scroll, stay fixed, or remain at the top of the document.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -44,5 +44,5 @@
   "bugs": {
     "url": "https://github.com/antonio99x/react-scroll-sense-header/issues"
   },
-  "homepage": "https://github.com/antonio99x/react-scroll-sense-header#readme"
+  "homepage": "https://antonio99x.github.io/scroll-sense-header/"
 }
