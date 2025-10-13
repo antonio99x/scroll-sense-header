@@ -287,7 +287,8 @@
 
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
-        const { ScrollSenseHeader } = window.ReactScrollSenseHeader;
+        // UMD build exposes ScrollSenseHeader on window.ReactScrollSenseHeader
+        const { ScrollSenseHeader } = window.ReactScrollSenseHeader || {};
 
         function DemoApp() {
             const headerRef = useRef();
