@@ -20,6 +20,10 @@ A React component that provides intelligent header behavior based on scroll posi
 npm install react-scroll-sense-header
 ```
 
+## Demo
+
+See the component in action: [Live Demo](https://antonio99x.github.io/scroll-sense-header/)
+
 ## CSS Import
 
 You need to import the CSS styles in your application:
@@ -31,44 +35,16 @@ import 'react-scroll-sense-header/dist/styles.css';
 ## Usage
 
 ```tsx
-import React, { useRef } from 'react';
 import { ScrollSenseHeader, ScrollSenseHeaderRef } from 'react-scroll-sense-header';
 import 'react-scroll-sense-header/dist/styles.css';
 
 function App() {
-  const headerRef = useRef<ScrollSenseHeaderRef>(null);
-
   return (
-    <div>
-      <ScrollSenseHeader
-        ref={headerRef}
-        behavior="hide-on-scroll"
-        hideThreshold={100}
-        showThreshold={5}
-        boxShadow="light"
-        transitionDuration={300}
-        zIndex={1000}
-        backgroundColor="#ffffff"
-        onScrollStateChange={(isSticky, isHidden) => {
-          console.log('Header state:', { isSticky, isHidden });
-        }}
-      >
-        <div style={{ padding: '1rem 2rem', background: 'white' }}>
-          <h1>My Header</h1>
-          <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </nav>
-        </div>
-      </ScrollSenseHeader>
-      
-      {/* Your page content */}
-      <div style={{ height: '200vh' }}>
-        <h2>Page Content</h2>
-        <p>Scroll down to see the header behavior...</p>
-      </div>
-    </div>
+    <ScrollSenseHeader>
+      <header>
+        Your header content...
+      </header>
+    </ScrollSenseHeader>
   );
 }
 ```
@@ -159,13 +135,11 @@ You can customize the appearance using:
 
 1. **CSS Classes**: Add your own classes via the `className` prop
 2. **Inline Styles**: Use the `style` prop for dynamic styling
-3. **CSS Variables**: The component uses `--transition-duration` for transitions
 
 ```tsx
 <ScrollSenseHeader
   className="my-custom-header"
   style={{
-    '--transition-duration': '500ms',
     background: 'linear-gradient(45deg, #667eea, #764ba2)',
     color: 'white'
   }}
