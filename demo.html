@@ -10,12 +10,8 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <!-- Load RequireJS for AMD support -->
-    <script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
-    
-    <!-- Load our component from CDN -->
-    <script src="https://unpkg.com/react-scroll-sense-header@latest/dist/index.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/react-scroll-sense-header@latest/dist/styles.css">
+    <!-- Load styles -->
+    <link rel="stylesheet" href="./dist/styles.css">
     
     <style>
         * {
@@ -99,36 +95,37 @@
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
-
-        .demo-section {
-            margin: '2rem';
-            padding: '2rem';
-            background: '#f8f9fa';
-            border-radius: '8px';
-            border: '1px solid #e0e0e0';
-            box-shadow: '0 2px 4px rgba(0,0,0,0.1)';
-        }
-
-        .demo-section h3 {
-            color: '#495057';
-            margin-bottom: '1rem';
-        }
-
-        .demo-section p {
-            color: '#6c757d';
-            line-height: '1.6';
-        }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
+    <!-- Simple module loader -->
+    <script>
+        window.require = function(module) {
+            if (module === 'react') return React;
+            if (module === 'react/jsx-runtime') return React;
+            if (module === './styles.css') return {};
+            return {};
+        };
+        
+        window.module = { exports: {} };
+        window.exports = window.module.exports;
+    </script>
+
+    <!-- Load the component files -->
+    <script src="./dist/ScrollSenseHeader.js"></script>
+    <script src="./dist/index.js"></script>
+
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
         
-        // Load ScrollSenseHeader using AMD
-        let ScrollSenseHeader = null;
+        // Get the component from module exports
+        const ScrollSenseHeader = window.module.exports.ScrollSenseHeader || window.module.exports.default;
         
+        console.log('Module exports:', window.module.exports);
+        console.log('ScrollSenseHeader:', ScrollSenseHeader);
+
         function SimpleDemo() {
             const headerRef = useRef();
             const [scrollY, setScrollY] = useState(0);
@@ -147,6 +144,7 @@
                     <div style={{ padding: '2rem', textAlign: 'center', background: '#ffebee', color: '#c62828', border: '2px solid #c62828', margin: '2rem', borderRadius: '8px' }}>
                         <h2>ScrollSenseHeader Not Found</h2>
                         <p>The component failed to load. Please check the console for errors.</p>
+                        <p>Module exports: {JSON.stringify(window.module.exports)}</p>
                     </div>
                 );
             }
@@ -246,15 +244,8 @@
             );
         }
 
-        // Load ScrollSenseHeader using AMD
-        require(['index'], function(index) {
-            ScrollSenseHeader = index.ScrollSenseHeader;
-            console.log('ScrollSenseHeader loaded:', ScrollSenseHeader);
-            
-            // Re-render the component once ScrollSenseHeader is loaded
-            const root = ReactDOM.createRoot(document.getElementById('root'));
-            root.render(<SimpleDemo />);
-        });
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<SimpleDemo />);
     </script>
 </body>
 </html>
