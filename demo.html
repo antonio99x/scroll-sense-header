@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScrollSenseHeader - Interactive Demo</title>
+    <title>ScrollSenseHeader - Simple Demo</title>
     
     <!-- Load React and ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <!-- Load styles -->
-    <link rel="stylesheet" href="./dist/styles.css">
+    <!-- Load our component from CDN -->
+    <script src="https://unpkg.com/react-scroll-sense-header@latest/dist/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/react-scroll-sense-header@latest/dist/styles.css">
     
     <style>
         * {
@@ -24,30 +25,6 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .demo-container {
-            display: flex;
-            min-height: 100vh;
-            background: white;
-        }
-
-        .sidebar {
-            width: 350px;
-            background: #f8f9fa;
-            border-right: 1px solid #e9ecef;
-            overflow-y: auto;
-            position: fixed;
-            height: 100vh;
-            z-index: 1000;
-        }
-
-        .main-content {
-            flex: 1;
-            margin-left: 350px;
-            min-height: 100vh;
         }
 
         .demo-header {
@@ -68,139 +45,44 @@
             opacity: 0.9;
         }
 
-        .controls-panel {
-            padding: 2rem;
-        }
-
-        .controls-grid {
+        .header-content {
+            padding: 1rem 2rem;
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .control-group {
+            justify-content: space-between;
+            align-items: center;
             background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .control-group h3 {
-            margin-bottom: 1rem;
-            color: #495057;
-            font-size: 1.1rem;
-            font-weight: 600;
+        .header-content h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
         }
 
-        .control-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            gap: 1rem;
-        }
-
-        .control-row:last-child {
-            margin-bottom: 0;
-        }
-
-        label {
-            font-weight: 500;
-            color: #495057;
-            min-width: 120px;
-            font-size: 0.9rem;
-        }
-
-        input, select {
-            padding: 0.5rem;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            flex: 1;
-        }
-
-        input[type="range"] {
-            flex: 1;
-        }
-
-        input[type="color"] {
-            width: 50px;
-            height: 40px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .value-display {
-            background: #e9ecef;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            min-width: 60px;
-            text-align: center;
-        }
-
-        .button-group {
+        .header-content nav {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
         }
 
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
+        .header-content nav a {
+            text-decoration: none;
+            color: #333;
             font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
             transition: background-color 0.2s;
         }
 
-        button:hover {
-            background: #0056b3;
-        }
-
-        button.secondary {
-            background: #6c757d;
-        }
-
-        button.secondary:hover {
-            background: #545b62;
-        }
-
-        .status-panel {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        .status-panel h4 {
-            color: #155724;
-            margin-bottom: 0.5rem;
-        }
-
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.25rem;
-        }
-
-        .status-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .status-value {
-            font-weight: 600;
-            color: #155724;
+        .header-content nav a:hover {
+            background: #f8f9fa;
         }
 
         .content-section {
             padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .content-section h2 {
@@ -215,118 +97,40 @@
             font-size: 1.1rem;
         }
 
-        .demo-header-content {
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .demo-section {
+            margin: '2rem';
+            padding: '2rem';
+            background: '#f8f9fa';
+            border-radius: '8px';
+            border: '1px solid #e0e0e0';
+            box-shadow: '0 2px 4px rgba(0,0,0,0.1)';
         }
 
-        .demo-header-content h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #333;
+        .demo-section h3 {
+            color: '#495057';
+            margin-bottom: '1rem';
         }
 
-        .demo-header-content nav {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .demo-header-content nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-
-        .demo-header-content nav a:hover {
-            background: #f8f9fa;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .control-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-            
-            label {
-                min-width: auto;
-            }
-            
-            .demo-header h1 {
-                font-size: 2rem;
-            }
+        .demo-section p {
+            color: '#6c757d';
+            line-height: '1.6';
         }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
-    <!-- Simple module loader -->
-    <script>
-        // Create a simple module system
-        window.require = function(module) {
-            if (module === 'react') return React;
-            if (module === 'react/jsx-runtime') return React;
-            if (module === './styles.css') return {};
-            return {};
-        };
-        
-        window.module = { exports: {} };
-        window.exports = window.module.exports;
-    </script>
-
-    <!-- Load the component -->
-    <script src="./dist/ScrollSenseHeader.js"></script>
-    <script src="./dist/index.js"></script>
-
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
         
-        // Get the component from module exports
-        const ScrollSenseHeader = window.module.exports.ScrollSenseHeader || window.module.exports.default;
+        // Get the ScrollSenseHeader component
+        const ScrollSenseHeader = window.ReactScrollSenseHeader?.ScrollSenseHeader || window.ScrollSenseHeader;
         
-        console.log('Module exports:', window.module.exports);
-        console.log('ScrollSenseHeader:', ScrollSenseHeader);
+        console.log('ScrollSenseHeader component:', ScrollSenseHeader);
 
-        function DemoApp() {
+        function SimpleDemo() {
             const headerRef = useRef();
             const [scrollY, setScrollY] = useState(0);
-            const [scrollState, setScrollState] = useState({
-                isSticky: false,
-                isHidden: false,
-                isTransitioning: false
-            });
-
-            // Component props state
-            const [props, setProps] = useState({
-                behavior: 'hide-on-scroll',
-                hideThreshold: 100,
-                showThreshold: 5,
-                boxShadow: 'light',
-                transitionDuration: 300,
-                zIndex: 1000,
-                backgroundColor: '#ffffff',
-                className: 'demo-header',
-                dataAttribute: 'data-scroll-sense-header'
-            });
 
             // Track scroll position
             useEffect(() => {
@@ -337,291 +141,112 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
-            // Handle scroll state changes
-            const handleScrollStateChange = (isSticky, isHidden) => {
-                setScrollState(prev => ({
-                    ...prev,
-                    isSticky,
-                    isHidden
-                }));
-            };
-
-            // Reset header
-            const resetHeader = () => {
-                if (headerRef.current) {
-                    headerRef.current.reset();
-                }
-            };
-
-            // Update prop
-            const updateProp = (key, value) => {
-                setProps(prev => ({
-                    ...prev,
-                    [key]: value
-                }));
-            };
-
             if (!ScrollSenseHeader) {
                 return (
                     <div style={{ padding: '2rem', textAlign: 'center', background: '#ffebee', color: '#c62828', border: '2px solid #c62828', margin: '2rem', borderRadius: '8px' }}>
                         <h2>ScrollSenseHeader Not Found</h2>
                         <p>The component failed to load. Please check the console for errors.</p>
-                        <p>Module exports: {JSON.stringify(window.module.exports)}</p>
                     </div>
                 );
             }
 
             return (
-                <div className="demo-container">
-                    <div className="sidebar">
-                        <div className="controls-panel">
-                            <h2 style={{ marginBottom: '1rem', color: '#495057' }}>Interactive Controls</h2>
-                            
-                            <div className="controls-grid">
-                                <div className="control-group">
-                                    <h3>Behavior Settings</h3>
-                                    
-                                    <div className="control-row">
-                                        <label>Behavior:</label>
-                                        <select 
-                                            value={props.behavior} 
-                                            onChange={(e) => updateProp('behavior', e.target.value)}
-                                        >
-                                            <option value="hide-on-scroll">Hide on Scroll</option>
-                                            <option value="always-fixed">Always Fixed</option>
-                                            <option value="always-top">Always Top</option>
-                                        </select>
-                                    </div>
+                <div>
+                    <div className="demo-header">
+                        <h1>ScrollSenseHeader</h1>
+                        <p>Simple Demo - Scroll down to see the header behavior!</p>
+                    </div>
 
-                                    <div className="control-row">
-                                        <label>Hide Threshold:</label>
-                                        <input
-                                            type="range"
-                                            min="50"
-                                            max="500"
-                                            value={props.hideThreshold}
-                                            onChange={(e) => updateProp('hideThreshold', parseInt(e.target.value))}
-                                        />
-                                        <div className="value-display">{props.hideThreshold}px</div>
-                                    </div>
+                    <ScrollSenseHeader
+                        ref={headerRef}
+                        behavior="hide-on-scroll"
+                        hideThreshold={100}
+                        showThreshold={5}
+                        boxShadow="light"
+                        transitionDuration={300}
+                        zIndex={1000}
+                        backgroundColor="#ffffff"
+                    >
+                        <div className="header-content">
+                            <h1>ScrollSenseHeader Demo</h1>
+                            <nav>
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#contact">Contact</a>
+                                <a href="#docs">Docs</a>
+                            </nav>
+                        </div>
+                    </ScrollSenseHeader>
 
-                                    <div className="control-row">
-                                        <label>Show Threshold:</label>
-                                        <input
-                                            type="range"
-                                            min="1"
-                                            max="50"
-                                            value={props.showThreshold}
-                                            onChange={(e) => updateProp('showThreshold', parseInt(e.target.value))}
-                                        />
-                                        <div className="value-display">{props.showThreshold}px</div>
-                                    </div>
-                                </div>
+                    <div className="content-section">
+                        <h2>ScrollSenseHeader Demo</h2>
+                        <p>
+                            This is a simple demo of the ScrollSenseHeader component. 
+                            Scroll down to see the header become sticky and then hide.
+                            Scroll back up to see it reappear.
+                        </p>
 
-                                <div className="control-group">
-                                    <h3>Visual Settings</h3>
-                                    
-                                    <div className="control-row">
-                                        <label>Box Shadow:</label>
-                                        <select 
-                                            value={props.boxShadow} 
-                                            onChange={(e) => updateProp('boxShadow', e.target.value)}
-                                        >
-                                            <option value="none">None</option>
-                                            <option value="light">Light</option>
-                                            <option value="medium">Medium</option>
-                                            <option value="heavy">Heavy</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="control-row">
-                                        <label>Background:</label>
-                                        <input
-                                            type="color"
-                                            value={props.backgroundColor}
-                                            onChange={(e) => updateProp('backgroundColor', e.target.value)}
-                                        />
-                                        <div className="value-display">{props.backgroundColor}</div>
-                                    </div>
-
-                                    <div className="control-row">
-                                        <label>Z-Index:</label>
-                                        <input
-                                            type="range"
-                                            min="100"
-                                            max="9999"
-                                            value={props.zIndex}
-                                            onChange={(e) => updateProp('zIndex', parseInt(e.target.value))}
-                                        />
-                                        <div className="value-display">{props.zIndex}</div>
-                                    </div>
-                                </div>
-
-                                <div className="control-group">
-                                    <h3>Animation Settings</h3>
-                                    
-                                    <div className="control-row">
-                                        <label>Transition Duration:</label>
-                                        <input
-                                            type="range"
-                                            min="0"
-                                            max="1000"
-                                            step="50"
-                                            value={props.transitionDuration}
-                                            onChange={(e) => updateProp('transitionDuration', parseInt(e.target.value))}
-                                        />
-                                        <div className="value-display">{props.transitionDuration}ms</div>
-                                    </div>
-
-                                    <div className="control-row">
-                                        <label>Custom Class:</label>
-                                        <input
-                                            type="text"
-                                            value={props.className}
-                                            onChange={(e) => updateProp('className', e.target.value)}
-                                            placeholder="Enter custom CSS class"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="button-group">
-                                <button onClick={resetHeader}>Reset Header</button>
-                                <button className="secondary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                                    Scroll to Top
-                                </button>
-                            </div>
-
-                            <div className="status-panel">
-                                <h4>Current Status</h4>
-                                <div className="status-item">
-                                    <span>Scroll Position:</span>
-                                    <span className="status-value">{scrollY}px</span>
-                                </div>
-                                <div className="status-item">
-                                    <span>Is Sticky:</span>
-                                    <span className="status-value">{scrollState.isSticky ? 'Yes' : 'No'}</span>
-                                </div>
-                                <div className="status-item">
-                                    <span>Is Hidden:</span>
-                                    <span className="status-value">{scrollState.isHidden ? 'Yes' : 'No'}</span>
-                                </div>
-                                <div className="status-item">
-                                    <span>Is Transitioning:</span>
-                                    <span className="status-value">{scrollState.isTransitioning ? 'Yes' : 'No'}</span>
-                                </div>
-                            </div>
+                        <div style={{
+                            margin: '2rem 0',
+                            padding: '2rem',
+                            backgroundColor: '#f8f9fa',
+                            borderRadius: '8px',
+                            border: '1px solid #e0e0e0',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                        }}>
+                            <h3 style={{ color: '#495057', marginBottom: '1rem' }}>Current Scroll Position: {scrollY}px</h3>
+                            <p style={{ color: '#6c757d', lineHeight: '1.6' }}>
+                                The header will become sticky when you scroll down 100px, 
+                                and will hide when you continue scrolling down.
+                            </p>
                         </div>
                     </div>
 
-                    <div className="main-content">
-                        <div className="demo-header">
-                            <h1>ScrollSenseHeader</h1>
-                            <p>Interactive Demo - Try all the features in real-time!</p>
-                        </div>
-
-                        <ScrollSenseHeader
-                            ref={headerRef}
-                            className={props.className}
-                            behavior={props.behavior}
-                            hideThreshold={props.hideThreshold}
-                            showThreshold={props.showThreshold}
-                            boxShadow={props.boxShadow}
-                            transitionDuration={props.transitionDuration}
-                            zIndex={props.zIndex}
-                            backgroundColor={props.backgroundColor}
-                            dataAttribute={props.dataAttribute}
-                            onScrollStateChange={handleScrollStateChange}
-                        >
-                            <div className="demo-header-content">
-                                <h1>ScrollSenseHeader Demo</h1>
-                                <nav>
-                                    <a href="#home">Home</a>
-                                    <a href="#about">About</a>
-                                    <a href="#contact">Contact</a>
-                                    <a href="#docs">Docs</a>
-                                </nav>
-                            </div>
-                        </ScrollSenseHeader>
-
-                        <div className="content-section">
-                            <h2>ScrollSenseHeader Features</h2>
-                            <p>
-                                This interactive demo showcases all the features of ScrollSenseHeader. 
-                                Use the controls in the sidebar to modify the component behavior in real-time!
-                            </p>
-
-                            <h3 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#495057' }}>Key Features:</h3>
-                            <ul style={{ color: '#6c757d', marginLeft: '2rem', marginBottom: '2rem' }}>
-                                <li><strong>Hide on Scroll:</strong> Header disappears when scrolling down, reappears when scrolling up</li>
-                                <li><strong>Always Fixed:</strong> Header stays fixed at the top of the viewport</li>
-                                <li><strong>Always Top:</strong> Header stays at the top of the document</li>
-                                <li><strong>Customizable Thresholds:</strong> Control when the header becomes sticky or hides</li>
-                                <li><strong>Box Shadow Presets:</strong> Choose from light, medium, heavy, or none</li>
-                                <li><strong>Smooth Transitions:</strong> Adjustable transition duration (set to 0 for instant changes)</li>
-                                <li><strong>Custom Styling:</strong> Full control over colors, z-index, and CSS classes</li>
-                            </ul>
-
-                            <h3 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#495057' }}>Try These Interactions:</h3>
-                            <ol style={{ color: '#6c757d', marginLeft: '2rem', marginBottom: '2rem' }}>
-                                <li>Scroll down slowly to see the header become sticky</li>
-                                <li>Continue scrolling to see it hide</li>
-                                <li>Scroll back up to see it reappear</li>
-                                <li>Try different behaviors using the dropdown</li>
-                                <li>Adjust thresholds to change when transitions occur</li>
-                                <li>Change box shadow and background color</li>
-                                <li>Set transition duration to 0 for instant changes</li>
-                                <li>Use the reset button to restore initial state</li>
-                            </ol>
-                        </div>
-
-                        {/* Generate content for scrolling */}
-                        {Array.from({ length: 20 }, (_, i) => (
-                            <div key={i} style={{
-                                margin: '2rem',
-                                padding: '2rem',
-                                backgroundColor: i % 2 === 0 ? '#f8f9fa' : '#ffffff',
-                                borderRadius: '8px',
-                                border: '1px solid #e0e0e0',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                            }}>
-                                <h3 style={{ color: '#495057', marginBottom: '1rem' }}>Demo Section {i + 1}</h3>
-                                <p style={{ color: '#6c757d', lineHeight: '1.6', marginBottom: '1rem' }}>
-                                    This is demo content for section {i + 1}. Scroll through these sections to test 
-                                    the ScrollSenseHeader functionality. Notice how the header behaves differently 
-                                    based on your current settings.
-                                </p>
-                                <p style={{ color: '#6c757d', lineHeight: '1.6' }}>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                                    eu fugiat nulla pariatur.
-                                </p>
-                            </div>
-                        ))}
-
-                        <div style={{
-                            textAlign: 'center',
-                            padding: '3rem 2rem',
-                            backgroundColor: '#d4edda',
-                            borderRadius: '8px',
+                    {/* Generate content for scrolling */}
+                    {Array.from({ length: 15 }, (_, i) => (
+                        <div key={i} style={{
                             margin: '2rem',
-                            border: '1px solid #c3e6cb'
+                            padding: '2rem',
+                            backgroundColor: i % 2 === 0 ? '#f8f9fa' : '#ffffff',
+                            borderRadius: '8px',
+                            border: '1px solid #e0e0e0',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                         }}>
-                            <h3 style={{ color: '#155724', marginBottom: '1rem' }}>Demo Complete!</h3>
-                            <p style={{ color: '#155724', fontSize: '1.1rem' }}>
-                                You've explored all the features of ScrollSenseHeader! 
-                                Check out the <a href="https://github.com/antonio99x/react-scroll-sense-header" style={{ color: '#155724', fontWeight: 'bold' }}>GitHub repository</a> for more information.
+                            <h3 style={{ color: '#495057', marginBottom: '1rem' }}>Demo Section {i + 1}</h3>
+                            <p style={{ color: '#6c757d', lineHeight: '1.6', marginBottom: '1rem' }}>
+                                This is demo content for section {i + 1}. Scroll through these sections to test 
+                                the ScrollSenseHeader functionality.
+                            </p>
+                            <p style={{ color: '#6c757d', lineHeight: '1.6' }}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
+                                eu fugiat nulla pariatur.
                             </p>
                         </div>
+                    ))}
+
+                    <div style={{
+                        textAlign: 'center',
+                        padding: '3rem 2rem',
+                        backgroundColor: '#d4edda',
+                        borderRadius: '8px',
+                        margin: '2rem',
+                        border: '1px solid #c3e6cb'
+                    }}>
+                        <h3 style={{ color: '#155724', marginBottom: '1rem' }}>Demo Complete!</h3>
+                        <p style={{ color: '#155724', fontSize: '1.1rem' }}>
+                            You've seen the ScrollSenseHeader in action! 
+                            Check out the <a href="https://github.com/antonio99x/react-scroll-sense-header" style={{ color: '#155724', fontWeight: 'bold' }}>GitHub repository</a> for more information.
+                        </p>
                     </div>
                 </div>
             );
         }
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<DemoApp />);
+        root.render(<SimpleDemo />);
     </script>
 </body>
 </html>
