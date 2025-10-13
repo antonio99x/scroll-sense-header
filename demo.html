@@ -4,26 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScrollSenseHeader - Interactive Demo</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Load React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Use a simple module loader for CommonJS -->
-    <script>
-        // Simple CommonJS module loader for browser
-        window.require = function(module) {
-            if (module === 'react') return React;
-            if (module === 'react/jsx-runtime') return React;
-            if (module === './styles.css') return {}; // CSS is already loaded
-            return {};
-        };
-        
-        window.module = { exports: {} };
-        window.exports = window.module.exports;
-    </script>
-    <!-- Load the component files -->
-    <script src="./dist/ScrollSenseHeader.js"></script>
-    <script src="./dist/index.js"></script>
-    <link rel="stylesheet" href="./dist/styles.css">
+    
+    <!-- Load our component from CDN -->
+    <script src="https://unpkg.com/react-scroll-sense-header@latest/dist/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/react-scroll-sense-header@latest/dist/styles.css">
+    
     <style>
         * {
             margin: 0;
@@ -260,28 +250,6 @@
             background: #f8f9fa;
         }
 
-        .scroll-indicator {
-            position: fixed;
-            top: 50%;
-            right: 2rem;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            z-index: 1000;
-        }
-
-        .scroll-indicator h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .scroll-indicator .value {
-            font-weight: bold;
-            color: #4CAF50;
-        }
-
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
@@ -306,10 +274,6 @@
             .demo-header h1 {
                 font-size: 2rem;
             }
-            
-            .scroll-indicator {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -319,31 +283,22 @@
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
         
-        // Access the component from CommonJS exports
-        console.log('Module exports:', window.module.exports);
-        console.log('ScrollSenseHeader from module:', window.module.exports.ScrollSenseHeader);
-        console.log('Default export:', window.module.exports.default);
+        // Get the ScrollSenseHeader component from the global scope
+        const ScrollSenseHeader = window.ReactScrollSenseHeader?.ScrollSenseHeader || window.ScrollSenseHeader;
         
-        // Get the component from CommonJS exports
-        const ScrollSenseHeader = window.module.exports.ScrollSenseHeader || window.module.exports.default;
+        console.log('Available globals:', Object.keys(window).filter(k => k.includes('ScrollSense')));
+        console.log('ScrollSenseHeader component:', ScrollSenseHeader);
         
         if (!ScrollSenseHeader) {
-            console.error('ScrollSenseHeader not found in module exports');
-            // Create a fallback component
-            ScrollSenseHeader = ({ children, ...props }) => {
-                return React.createElement('div', { 
-                    style: { 
-                        padding: '20px', 
-                        background: '#ffebee', 
-                        color: '#c62828',
-                        border: '2px solid #c62828',
-                        borderRadius: '4px',
-                        margin: '20px'
-                    } 
-                }, 'ScrollSenseHeader component not loaded properly');
-            };
+            console.error('ScrollSenseHeader not found!');
+            document.getElementById('root').innerHTML = `
+                <div style="padding: 2rem; text-align: center; background: #ffebee; color: #c62828; border: 2px solid #c62828; margin: 2rem; border-radius: 8px;">
+                    <h2>ScrollSenseHeader Not Found</h2>
+                    <p>The component failed to load. Please check the console for errors.</p>
+                </div>
+            `;
         } else {
-            console.log('ScrollSenseHeader loaded successfully:', ScrollSenseHeader);
+            console.log('ScrollSenseHeader loaded successfully!');
         }
 
         function DemoApp() {
@@ -400,6 +355,15 @@
                     [key]: value
                 }));
             };
+
+            if (!ScrollSenseHeader) {
+                return (
+                    <div style={{ padding: '2rem', textAlign: 'center', background: '#ffebee', color: '#c62828', border: '2px solid #c62828', margin: '2rem', borderRadius: '8px' }}>
+                        <h2>ScrollSenseHeader Not Found</h2>
+                        <p>The component failed to load. Please check the console for errors.</p>
+                    </div>
+                );
+            }
 
             return (
                 <div className="demo-container">
