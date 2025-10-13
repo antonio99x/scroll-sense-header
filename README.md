@@ -270,6 +270,17 @@ Check out the [live demo](https://your-username.github.io/react-scroll-sense-hea
 
 The demo includes comprehensive examples and interactive controls for every prop, making it easy to understand how the component works before integrating it into your project.
 
+## 🚀 GitHub Actions Deployment
+
+This repository uses GitHub Actions for automated deployment to GitHub Pages:
+
+- **Automatic deployment** on push to main branch
+- **Manual deployment** trigger available
+- **Build caching** for faster deployments
+- **Concurrent deployment protection**
+
+The demo is automatically updated whenever you push changes to the repository.
+
 ## Browser Support
 
 - Chrome 60+
