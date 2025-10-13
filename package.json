@@ -17,7 +17,7 @@
     "scroll",
     "typescript"
   ],
-  "author": "Your Name",
+  "author": "Antonio99x",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -34,12 +34,15 @@
     "README.md",
     "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/react-scroll-sense-header.git"
+    "url": "https://github.com/antonio99x/react-scroll-sense-header.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/react-scroll-sense-header/issues"
+    "url": "https://github.com/antonio99x/react-scroll-sense-header/issues"
   },
-  "homepage": "https://github.com/yourusername/react-scroll-sense-header#readme"
+  "homepage": "https://github.com/antonio99x/react-scroll-sense-header#readme"
 }
