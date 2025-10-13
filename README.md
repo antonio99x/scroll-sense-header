@@ -2,7 +2,7 @@
 
 A React component that provides sticky header functionality with scroll-based hiding and showing. Perfect for creating headers that stick to the top when scrolling down and hide when scrolling down further, then reappear when scrolling up.
 
-## 🎯 [Live Demo](https://antonio99x.github.io/react-scroll-sense-header/demo.html)
+## 🎯 [Live Demo](https://antonio99x.github.io/scroll-sense-header/demo.html)
 
 Try the interactive demo to see all features in action!
 
@@ -259,7 +259,7 @@ The header remains in its normal position in the document flow and doesn't chang
 
 ## 🎮 Interactive Demo
 
-Check out the [live demo](https://antonio99x.github.io/react-scroll-sense-header/demo.html) to:
+Check out the [live demo](https://antonio99x.github.io/scroll-sense-header/demo.html) to:
 
 - **Test all behaviors** in real-time
 - **Adjust thresholds** with interactive sliders
