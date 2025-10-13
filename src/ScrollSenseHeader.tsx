@@ -12,9 +12,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
       hideThreshold,
       showThreshold = 3,
       dataAttribute = 'data-scroll-sense-header',
-      boxShadow = 'none',
-      customBoxShadow,
-      enableTransition = true,
+      boxShadow = 'light',
       transitionDuration = 300,
       zIndex = 1000,
       backgroundColor = 'transparent',
@@ -114,7 +112,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
             document.body.style.paddingTop = `${headerHeight}px`;
 
             // Wait for transition duration and add transition class to prevent flicker
-            if (enableTransition) {
+            if (transitionDuration > 0) {
               setTimeout(() => {
                 header.classList.add('scroll-sense-header--sticky-transition');
                 setScrollState(prev => ({ ...prev, isTransitioning: true }));
@@ -145,7 +143,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
-    }, [lastScrollY, hideThreshold, showThreshold, behavior, enableTransition]);
+    }, [lastScrollY, hideThreshold, showThreshold, behavior, transitionDuration]);
 
     // Call onScrollStateChange when scroll state changes
     useEffect(() => {
@@ -160,10 +158,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
       ...style,
       zIndex,
       backgroundColor,
-      ...(boxShadow === 'custom' && customBoxShadow && {
-        boxShadow: customBoxShadow,
-      }),
-      ...(enableTransition && {
+      ...(transitionDuration > 0 && {
         '--transition-duration': `${transitionDuration}ms`,
       }),
     };

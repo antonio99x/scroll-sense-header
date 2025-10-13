@@ -50,7 +50,7 @@ function App() {
 
 ```tsx
 <ScrollSenseHeader
-  transitionDelay={500}        // Transition delay in ms
+  transitionDuration={500}        // Transition duration in ms
   hideThreshold={100}          // Hide threshold in pixels
   showThreshold={5}           // Show threshold in pixels
   onScrollStateChange={(isSticky, isHidden) => {

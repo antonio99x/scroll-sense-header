@@ -1,7 +1,7 @@
 import { ReactNode, CSSProperties } from 'react';
 
 export type HeaderBehavior = 'hide-on-scroll' | 'always-fixed' | 'always-top';
-export type BoxShadowPreset = 'none' | 'light' | 'medium' | 'heavy' | 'custom';
+export type BoxShadowPreset = 'none' | 'light' | 'medium' | 'heavy';
 
 export interface ScrollSenseHeaderProps {
   children: ReactNode;
@@ -12,8 +12,6 @@ export interface ScrollSenseHeaderProps {
   showThreshold?: number;
   dataAttribute?: string;
   boxShadow?: BoxShadowPreset;
-  customBoxShadow?: string;
-  enableTransition?: boolean;
   transitionDuration?: number;
   zIndex?: number;
   backgroundColor?: string;

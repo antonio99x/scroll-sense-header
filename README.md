@@ -2,6 +2,10 @@
 
 A React component that provides sticky header functionality with scroll-based hiding and showing. Perfect for creating headers that stick to the top when scrolling down and hide when scrolling down further, then reappear when scrolling up.
 
+## 🎯 [Live Demo](https://your-username.github.io/react-scroll-sense-header/demo.html)
+
+Try the interactive demo to see all features in action!
+
 ## Features
 
 - **Smart Scroll Detection**: Automatically detects scroll direction and position
@@ -70,11 +74,10 @@ function App() {
         ref={headerRef}
         className="custom-header"
         behavior="hide-on-scroll"
-        transitionDelay={500}
+        transitionDuration={500}
         hideThreshold={150}
         showThreshold={10}
         boxShadow={true}
-        enableTransition={true}
         transitionDuration={400}
         zIndex={2000}
         backgroundColor="#ffffff"
@@ -163,13 +166,12 @@ Strong shadow for prominent depth.
 </ScrollSenseHeader>
 ```
 
-### custom
-Use your own custom box shadow value.
+### Custom Box Shadow
+You can apply custom box shadow by passing it directly through the `style` prop:
 
 ```tsx
 <ScrollSenseHeader 
-  boxShadow="custom" 
-  customBoxShadow="0 4px 12px 0 rgba(59, 130, 246, 0.15)"
+  style={{ boxShadow: "0 4px 12px 0 rgba(59, 130, 246, 0.15)" }}
 >
   <header>Your header content</header>
 </ScrollSenseHeader>
@@ -186,10 +188,8 @@ Use your own custom box shadow value.
 | `hideThreshold` | `number` | `headerHeight` | Scroll position threshold for hiding the header |
 | `showThreshold` | `number` | `3` | Scroll position threshold for showing the header |
 | `dataAttribute` | `string` | `'data-scroll-sense-header'` | Data attribute name for the wrapper element |
-| `boxShadow` | `'none' \| 'light' \| 'medium' \| 'heavy' \| 'custom'` | `'none'` | Box shadow preset to apply when sticky |
-| `customBoxShadow` | `string` | - | Custom box shadow value (only used when `boxShadow="custom"`) |
-| `enableTransition` | `boolean` | `true` | Whether to enable CSS transitions |
-| `transitionDuration` | `number` | `300` | Duration of transitions in milliseconds |
+| `boxShadow` | `'none' \| 'light' \| 'medium' \| 'heavy'` | `'light'` | Box shadow preset to apply when sticky |
+| `transitionDuration` | `number` | `300` | Duration of transitions in milliseconds (set to 0 to disable transitions) |
 | `zIndex` | `number` | `1000` | CSS z-index value |
 | `backgroundColor` | `string` | `'transparent'` | Background color of the header |
 | `onScrollStateChange` | `(isSticky: boolean, isHidden: boolean) => void` | - | Callback fired when scroll state changes |
@@ -256,6 +256,19 @@ The header is immediately fixed to the top of the viewport and stays there regar
 
 ### always-top behavior
 The header remains in its normal position in the document flow and doesn't change based on scroll.
+
+## 🎮 Interactive Demo
+
+Check out the [live demo](https://your-username.github.io/react-scroll-sense-header/demo.html) to:
+
+- **Test all behaviors** in real-time
+- **Adjust thresholds** with interactive sliders
+- **Change visual settings** like box shadow and colors
+- **Modify transition duration** from instant to smooth animations
+- **See live status updates** as you scroll
+- **Try the reset functionality**
+
+The demo includes comprehensive examples and interactive controls for every prop, making it easy to understand how the component works before integrating it into your project.
 
 ## Browser Support
 

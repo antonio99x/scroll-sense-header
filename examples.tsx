@@ -54,7 +54,7 @@ export function AdvancedExample() {
       <ScrollSenseHeader
         ref={headerRef}
         className="custom-header"
-        transitionDelay={500}
+        transitionDuration={500}
         hideThreshold={150}
         showThreshold={10}
         onScrollStateChange={handleScrollStateChange}
@@ -160,7 +160,7 @@ export function CustomStylingExample() {
       
       <ScrollSenseHeader
         className="custom-sticky-header"
-        transitionDelay={200}
+        transitionDuration={200}
       >
         <header style={{ 
           padding: '1rem',

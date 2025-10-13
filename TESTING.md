@@ -87,7 +87,7 @@ npm link react-scroll-sense-header
 - [ ] Body padding adjusts to prevent layout shift
 
 ### ✅ Props Testing
-- [ ] `transitionDelay` prop works
+- [ ] `transitionDuration` prop works
 - [ ] `hideThreshold` prop works  
 - [ ] `showThreshold` prop works
 - [ ] `onScrollStateChange` callback fires
