@@ -372,137 +372,138 @@
                             <h2 style={{ marginBottom: '1rem', color: '#495057' }}>Interactive Controls</h2>
                             
                             <div className="controls-grid">
-                            <div className="control-group">
-                                <h3>Behavior Settings</h3>
-                                
-                                <div className="control-row">
-                                    <label>Behavior:</label>
-                                    <select 
-                                        value={props.behavior} 
-                                        onChange={(e) => updateProp('behavior', e.target.value)}
-                                    >
-                                        <option value="hide-on-scroll">Hide on Scroll</option>
-                                        <option value="always-fixed">Always Fixed</option>
-                                        <option value="always-top">Always Top</option>
-                                    </select>
+                                <div className="control-group">
+                                    <h3>Behavior Settings</h3>
+                                    
+                                    <div className="control-row">
+                                        <label>Behavior:</label>
+                                        <select 
+                                            value={props.behavior} 
+                                            onChange={(e) => updateProp('behavior', e.target.value)}
+                                        >
+                                            <option value="hide-on-scroll">Hide on Scroll</option>
+                                            <option value="always-fixed">Always Fixed</option>
+                                            <option value="always-top">Always Top</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="control-row">
+                                        <label>Hide Threshold:</label>
+                                        <input
+                                            type="range"
+                                            min="50"
+                                            max="500"
+                                            value={props.hideThreshold}
+                                            onChange={(e) => updateProp('hideThreshold', parseInt(e.target.value))}
+                                        />
+                                        <div className="value-display">{props.hideThreshold}px</div>
+                                    </div>
+
+                                    <div className="control-row">
+                                        <label>Show Threshold:</label>
+                                        <input
+                                            type="range"
+                                            min="1"
+                                            max="50"
+                                            value={props.showThreshold}
+                                            onChange={(e) => updateProp('showThreshold', parseInt(e.target.value))}
+                                        />
+                                        <div className="value-display">{props.showThreshold}px</div>
+                                    </div>
                                 </div>
 
-                                <div className="control-row">
-                                    <label>Hide Threshold:</label>
-                                    <input
-                                        type="range"
-                                        min="50"
-                                        max="500"
-                                        value={props.hideThreshold}
-                                        onChange={(e) => updateProp('hideThreshold', parseInt(e.target.value))}
-                                    />
-                                    <div className="value-display">{props.hideThreshold}px</div>
+                                <div className="control-group">
+                                    <h3>Visual Settings</h3>
+                                    
+                                    <div className="control-row">
+                                        <label>Box Shadow:</label>
+                                        <select 
+                                            value={props.boxShadow} 
+                                            onChange={(e) => updateProp('boxShadow', e.target.value)}
+                                        >
+                                            <option value="none">None</option>
+                                            <option value="light">Light</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="heavy">Heavy</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="control-row">
+                                        <label>Background:</label>
+                                        <input
+                                            type="color"
+                                            value={props.backgroundColor}
+                                            onChange={(e) => updateProp('backgroundColor', e.target.value)}
+                                        />
+                                        <div className="value-display">{props.backgroundColor}</div>
+                                    </div>
+
+                                    <div className="control-row">
+                                        <label>Z-Index:</label>
+                                        <input
+                                            type="range"
+                                            min="100"
+                                            max="9999"
+                                            value={props.zIndex}
+                                            onChange={(e) => updateProp('zIndex', parseInt(e.target.value))}
+                                        />
+                                        <div className="value-display">{props.zIndex}</div>
+                                    </div>
                                 </div>
 
-                                <div className="control-row">
-                                    <label>Show Threshold:</label>
-                                    <input
-                                        type="range"
-                                        min="1"
-                                        max="50"
-                                        value={props.showThreshold}
-                                        onChange={(e) => updateProp('showThreshold', parseInt(e.target.value))}
-                                    />
-                                    <div className="value-display">{props.showThreshold}px</div>
+                                <div className="control-group">
+                                    <h3>Animation Settings</h3>
+                                    
+                                    <div className="control-row">
+                                        <label>Transition Duration:</label>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="1000"
+                                            step="50"
+                                            value={props.transitionDuration}
+                                            onChange={(e) => updateProp('transitionDuration', parseInt(e.target.value))}
+                                        />
+                                        <div className="value-display">{props.transitionDuration}ms</div>
+                                    </div>
+
+                                    <div className="control-row">
+                                        <label>Custom Class:</label>
+                                        <input
+                                            type="text"
+                                            value={props.className}
+                                            onChange={(e) => updateProp('className', e.target.value)}
+                                            placeholder="Enter custom CSS class"
+                                        />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="control-group">
-                                <h3>Visual Settings</h3>
-                                
-                                <div className="control-row">
-                                    <label>Box Shadow:</label>
-                                    <select 
-                                        value={props.boxShadow} 
-                                        onChange={(e) => updateProp('boxShadow', e.target.value)}
-                                    >
-                                        <option value="none">None</option>
-                                        <option value="light">Light</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="heavy">Heavy</option>
-                                    </select>
-                                </div>
-
-                                <div className="control-row">
-                                    <label>Background:</label>
-                                    <input
-                                        type="color"
-                                        value={props.backgroundColor}
-                                        onChange={(e) => updateProp('backgroundColor', e.target.value)}
-                                    />
-                                    <div className="value-display">{props.backgroundColor}</div>
-                                </div>
-
-                                <div className="control-row">
-                                    <label>Z-Index:</label>
-                                    <input
-                                        type="range"
-                                        min="100"
-                                        max="9999"
-                                        value={props.zIndex}
-                                        onChange={(e) => updateProp('zIndex', parseInt(e.target.value))}
-                                    />
-                                    <div className="value-display">{props.zIndex}</div>
-                                </div>
+                            <div className="button-group">
+                                <button onClick={resetHeader}>Reset Header</button>
+                                <button className="secondary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                                    Scroll to Top
+                                </button>
                             </div>
 
-                            <div className="control-group">
-                                <h3>Animation Settings</h3>
-                                
-                                <div className="control-row">
-                                    <label>Transition Duration:</label>
-                                    <input
-                                        type="range"
-                                        min="0"
-                                        max="1000"
-                                        step="50"
-                                        value={props.transitionDuration}
-                                        onChange={(e) => updateProp('transitionDuration', parseInt(e.target.value))}
-                                    />
-                                    <div className="value-display">{props.transitionDuration}ms</div>
+                            <div className="status-panel">
+                                <h4>Current Status</h4>
+                                <div className="status-item">
+                                    <span>Scroll Position:</span>
+                                    <span className="status-value">{scrollY}px</span>
                                 </div>
-
-                                <div className="control-row">
-                                    <label>Custom Class:</label>
-                                    <input
-                                        type="text"
-                                        value={props.className}
-                                        onChange={(e) => updateProp('className', e.target.value)}
-                                        placeholder="Enter custom CSS class"
-                                    />
+                                <div className="status-item">
+                                    <span>Is Sticky:</span>
+                                    <span className="status-value">{scrollState.isSticky ? 'Yes' : 'No'}</span>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="button-group">
-                            <button onClick={resetHeader}>Reset Header</button>
-                            <button className="secondary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                                Scroll to Top
-                            </button>
-                        </div>
-
-                        <div className="status-panel">
-                            <h4>Current Status</h4>
-                            <div className="status-item">
-                                <span>Scroll Position:</span>
-                                <span className="status-value">{scrollY}px</span>
-                            </div>
-                            <div className="status-item">
-                                <span>Is Sticky:</span>
-                                <span className="status-value">{scrollState.isSticky ? 'Yes' : 'No'}</span>
-                            </div>
-                            <div className="status-item">
-                                <span>Is Hidden:</span>
-                                <span className="status-value">{scrollState.isHidden ? 'Yes' : 'No'}</span>
-                            </div>
-                            <div className="status-item">
-                                <span>Is Transitioning:</span>
-                                <span className="status-value">{scrollState.isTransitioning ? 'Yes' : 'No'}</span>
+                                <div className="status-item">
+                                    <span>Is Hidden:</span>
+                                    <span className="status-value">{scrollState.isHidden ? 'Yes' : 'No'}</span>
+                                </div>
+                                <div className="status-item">
+                                    <span>Is Transitioning:</span>
+                                    <span className="status-value">{scrollState.isTransitioning ? 'Yes' : 'No'}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -544,70 +545,70 @@
                                 Use the controls in the sidebar to modify the component behavior in real-time!
                             </p>
 
-                        <h3 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#495057' }}>Key Features:</h3>
-                        <ul style={{ color: '#6c757d', marginLeft: '2rem', marginBottom: '2rem' }}>
-                            <li><strong>Hide on Scroll:</strong> Header disappears when scrolling down, reappears when scrolling up</li>
-                            <li><strong>Always Fixed:</strong> Header stays fixed at the top of the viewport</li>
-                            <li><strong>Always Top:</strong> Header stays at the top of the document</li>
-                            <li><strong>Customizable Thresholds:</strong> Control when the header becomes sticky or hides</li>
-                            <li><strong>Box Shadow Presets:</strong> Choose from light, medium, heavy, or none</li>
-                            <li><strong>Smooth Transitions:</strong> Adjustable transition duration (set to 0 for instant changes)</li>
-                            <li><strong>Custom Styling:</strong> Full control over colors, z-index, and CSS classes</li>
-                        </ul>
+                            <h3 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#495057' }}>Key Features:</h3>
+                            <ul style={{ color: '#6c757d', marginLeft: '2rem', marginBottom: '2rem' }}>
+                                <li><strong>Hide on Scroll:</strong> Header disappears when scrolling down, reappears when scrolling up</li>
+                                <li><strong>Always Fixed:</strong> Header stays fixed at the top of the viewport</li>
+                                <li><strong>Always Top:</strong> Header stays at the top of the document</li>
+                                <li><strong>Customizable Thresholds:</strong> Control when the header becomes sticky or hides</li>
+                                <li><strong>Box Shadow Presets:</strong> Choose from light, medium, heavy, or none</li>
+                                <li><strong>Smooth Transitions:</strong> Adjustable transition duration (set to 0 for instant changes)</li>
+                                <li><strong>Custom Styling:</strong> Full control over colors, z-index, and CSS classes</li>
+                            </ul>
 
-                        <h3 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#495057' }}>Try These Interactions:</h3>
-                        <ol style={{ color: '#6c757d', marginLeft: '2rem', marginBottom: '2rem' }}>
-                            <li>Scroll down slowly to see the header become sticky</li>
-                            <li>Continue scrolling to see it hide</li>
-                            <li>Scroll back up to see it reappear</li>
-                            <li>Try different behaviors using the dropdown</li>
-                            <li>Adjust thresholds to change when transitions occur</li>
-                            <li>Change box shadow and background color</li>
-                            <li>Set transition duration to 0 for instant changes</li>
-                            <li>Use the reset button to restore initial state</li>
-                        </ol>
-                    </div>
+                            <h3 style={{ marginTop: '2rem', marginBottom: '1rem', color: '#495057' }}>Try These Interactions:</h3>
+                            <ol style={{ color: '#6c757d', marginLeft: '2rem', marginBottom: '2rem' }}>
+                                <li>Scroll down slowly to see the header become sticky</li>
+                                <li>Continue scrolling to see it hide</li>
+                                <li>Scroll back up to see it reappear</li>
+                                <li>Try different behaviors using the dropdown</li>
+                                <li>Adjust thresholds to change when transitions occur</li>
+                                <li>Change box shadow and background color</li>
+                                <li>Set transition duration to 0 for instant changes</li>
+                                <li>Use the reset button to restore initial state</li>
+                            </ol>
+                        </div>
 
-                    {/* Generate content for scrolling */}
-                    {Array.from({ length: 20 }, (_, i) => (
-                        <div key={i} style={{
-                            margin: '2rem',
-                            padding: '2rem',
-                            backgroundColor: i % 2 === 0 ? '#f8f9fa' : '#ffffff',
+                        {/* Generate content for scrolling */}
+                        {Array.from({ length: 20 }, (_, i) => (
+                            <div key={i} style={{
+                                margin: '2rem',
+                                padding: '2rem',
+                                backgroundColor: i % 2 === 0 ? '#f8f9fa' : '#ffffff',
+                                borderRadius: '8px',
+                                border: '1px solid #e0e0e0',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                            }}>
+                                <h3 style={{ color: '#495057', marginBottom: '1rem' }}>Demo Section {i + 1}</h3>
+                                <p style={{ color: '#6c757d', lineHeight: '1.6', marginBottom: '1rem' }}>
+                                    This is demo content for section {i + 1}. Scroll through these sections to test 
+                                    the ScrollSenseHeader functionality. Notice how the header behaves differently 
+                                    based on your current settings.
+                                </p>
+                                <p style={{ color: '#6c757d', lineHeight: '1.6' }}>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
+                                    eu fugiat nulla pariatur.
+                                </p>
+                            </div>
+                        ))}
+
+                        <div style={{
+                            textAlign: 'center',
+                            padding: '3rem 2rem',
+                            backgroundColor: '#d4edda',
                             borderRadius: '8px',
-                            border: '1px solid #e0e0e0',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                            margin: '2rem',
+                            border: '1px solid #c3e6cb'
                         }}>
-                            <h3 style={{ color: '#495057', marginBottom: '1rem' }}>Demo Section {i + 1}</h3>
-                            <p style={{ color: '#6c757d', lineHeight: '1.6', marginBottom: '1rem' }}>
-                                This is demo content for section {i + 1}. Scroll through these sections to test 
-                                the ScrollSenseHeader functionality. Notice how the header behaves differently 
-                                based on your current settings.
-                            </p>
-                            <p style={{ color: '#6c757d', lineHeight: '1.6' }}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                                eu fugiat nulla pariatur.
+                            <h3 style={{ color: '#155724', marginBottom: '1rem' }}>Demo Complete!</h3>
+                            <p style={{ color: '#155724', fontSize: '1.1rem' }}>
+                                You've explored all the features of ScrollSenseHeader! 
+                                Check out the <a href="https://github.com/antonio99x/react-scroll-sense-header" style={{ color: '#155724', fontWeight: 'bold' }}>GitHub repository</a> for more information.
                             </p>
                         </div>
-                    ))}
-
-                    <div style={{
-                        textAlign: 'center',
-                        padding: '3rem 2rem',
-                        backgroundColor: '#d4edda',
-                        borderRadius: '8px',
-                        margin: '2rem',
-                        border: '1px solid #c3e6cb'
-                    }}>
-                        <h3 style={{ color: '#155724', marginBottom: '1rem' }}>Demo Complete!</h3>
-                        <p style={{ color: '#155724', fontSize: '1.1rem' }}>
-                            You've explored all the features of ScrollSenseHeader! 
-                            Check out the <a href="https://github.com/antonio99x/react-scroll-sense-header" style={{ color: '#155724', fontWeight: 'bold' }}>GitHub repository</a> for more information.
-                        </p>
-                    </div>
                     </div>
                 </div>
             );
