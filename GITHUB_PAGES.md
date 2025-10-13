@@ -19,7 +19,7 @@ The interactive demo is available at: `demo.html`
 ### Automatic Deployment
 1. Push your changes to the `main` branch
 2. GitHub Actions automatically builds and deploys
-3. Access the demo at: `https://your-username.github.io/react-scroll-sense-header/demo.html`
+3. Access the demo at: `https://antonio99x.github.io/react-scroll-sense-header/demo.html`
 
 ### Manual Deployment
 You can also trigger deployment manually:
