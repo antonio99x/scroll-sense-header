@@ -7,7 +7,20 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Use local files for now -->
+    <!-- Use a simple module loader for CommonJS -->
+    <script>
+        // Simple CommonJS module loader for browser
+        window.require = function(module) {
+            if (module === 'react') return React;
+            if (module === 'react/jsx-runtime') return React;
+            if (module === './styles.css') return {}; // CSS is already loaded
+            return {};
+        };
+        
+        window.module = { exports: {} };
+        window.exports = window.module.exports;
+    </script>
+    <!-- Load the component files -->
     <script src="./dist/ScrollSenseHeader.js"></script>
     <script src="./dist/index.js"></script>
     <link rel="stylesheet" href="./dist/styles.css">
@@ -306,27 +319,18 @@
     <script type="text/babel">
         const { useState, useRef, useEffect } = React;
         
-        // Debug: Check what's available on window
-        console.log('Window ScrollSenseHeader:', window.ScrollSenseHeader);
-        console.log('Window ReactScrollSenseHeader:', window.ReactScrollSenseHeader);
-        console.log('All window keys containing ScrollSense:', Object.keys(window).filter(k => k.includes('ScrollSense')));
+        // Access the component from CommonJS exports
+        console.log('Module exports:', window.module.exports);
+        console.log('ScrollSenseHeader from module:', window.module.exports.ScrollSenseHeader);
+        console.log('Default export:', window.module.exports.default);
         
-        // Try different ways to access the component
-        let ScrollSenseHeader;
-        if (window.ScrollSenseHeader && window.ScrollSenseHeader.default) {
-            ScrollSenseHeader = window.ScrollSenseHeader.default;
-            console.log('Using ScrollSenseHeader.default');
-        } else if (window.ScrollSenseHeader) {
-            ScrollSenseHeader = window.ScrollSenseHeader;
-            console.log('Using ScrollSenseHeader directly');
-        } else if (window.ReactScrollSenseHeader && window.ReactScrollSenseHeader.ScrollSenseHeader) {
-            ScrollSenseHeader = window.ReactScrollSenseHeader.ScrollSenseHeader;
-            console.log('Using ReactScrollSenseHeader.ScrollSenseHeader');
-        } else {
-            console.error('ScrollSenseHeader not found on window object');
+        // Get the component from CommonJS exports
+        const ScrollSenseHeader = window.module.exports.ScrollSenseHeader || window.module.exports.default;
+        
+        if (!ScrollSenseHeader) {
+            console.error('ScrollSenseHeader not found in module exports');
             // Create a fallback component
             ScrollSenseHeader = ({ children, ...props }) => {
-                console.log('Using fallback component');
                 return React.createElement('div', { 
                     style: { 
                         padding: '20px', 
@@ -338,6 +342,8 @@
                     } 
                 }, 'ScrollSenseHeader component not loaded properly');
             };
+        } else {
+            console.log('ScrollSenseHeader loaded successfully:', ScrollSenseHeader);
         }
 
         function DemoApp() {
