@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-sense-header",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A React component that provides intelligent header behavior based on scroll position. The header can hide/show on scroll, stay fixed, or remain at the top of the document.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
