@@ -71,7 +71,6 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <ScrollSenseHeader
-        key={`${behavior}-${boxShadow}`}
         ref={headerRef}
         behavior={behavior}
         boxShadow={boxShadow}
