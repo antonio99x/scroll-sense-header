@@ -39,10 +39,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antonio99x/react-scroll-sense-header.git"
+    "url": "https://github.com/antonio99x/scroll-sense-header.git"
   },
   "bugs": {
-    "url": "https://github.com/antonio99x/react-scroll-sense-header/issues"
+    "url": "https://github.com/antonio99x/scroll-sense-header/issues"
   },
   "homepage": "https://antonio99x.github.io/scroll-sense-header/"
 }
