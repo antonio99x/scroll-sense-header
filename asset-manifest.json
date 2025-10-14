@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/scroll-sense-header/static/css/main.ae538ed6.css",
+    "main.js": "/scroll-sense-header/static/js/main.ee34e0f9.js",
+    "index.html": "/scroll-sense-header/index.html",
+    "main.ae538ed6.css.map": "/scroll-sense-header/static/css/main.ae538ed6.css.map",
+    "main.ee34e0f9.js.map": "/scroll-sense-header/static/js/main.ee34e0f9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ae538ed6.css",
+    "static/js/main.ee34e0f9.js"
+  ]
+}
