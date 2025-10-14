@@ -20,7 +20,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
     ref
   ) => {
     const headerRef = useRef<HTMLDivElement>(null);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const lastScrollYRef = useRef(0);
     const [scrollState, setScrollState] = useState<ScrollState>({
       isSticky: false,
       isHidden: false,
@@ -69,7 +69,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
           isHidden: false,
           isTransitioning: false,
         });
-        setLastScrollY(window.scrollY);
+        lastScrollYRef.current = window.scrollY;
       };
 
       // Reset first to clean up any previous behavior
@@ -97,7 +97,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
 
-        if (currentScrollY > lastScrollY) {
+        if (currentScrollY > lastScrollYRef.current) {
           // Scroll down
           if (currentScrollY > threshold) {
             header.style.top = `-${headerHeight}px`;
@@ -108,7 +108,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
 
             setScrollState(prev => ({ ...prev, isHidden: true }));
           }
-        } else if (currentScrollY < lastScrollY) {
+        } else if (currentScrollY < lastScrollYRef.current) {
           // Scroll up
           header.style.top = '0';
 
@@ -156,7 +156,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
           document.body.style.paddingTop = '0';
         }
 
-        setLastScrollY(currentScrollY);
+        lastScrollYRef.current = currentScrollY;
       };
 
       window.addEventListener('scroll', handleScroll, { passive: true });
@@ -164,7 +164,7 @@ const ScrollSenseHeader = forwardRef<ScrollSenseHeaderRef, ScrollSenseHeaderProp
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
-    }, [lastScrollY, hideThreshold, showThreshold, behavior, transitionDuration]);
+    }, [hideThreshold, showThreshold, behavior, transitionDuration]);
 
     // Call onScrollStateChange when scroll state changes
     useEffect(() => {
