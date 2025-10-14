@@ -59,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <ScrollSenseHeader
-        key={behavior}
+        key={`${behavior}-${boxShadow}`}
         ref={headerRef}
         behavior={behavior}
         boxShadow={boxShadow}
