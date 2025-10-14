@@ -1,21 +1,33 @@
 import React, { useRef, useState, useEffect } from "react";
 import { ScrollSenseHeader } from "react-scroll-sense-header";
+import type { ScrollSenseHeaderRef, HeaderBehavior, BoxShadowPreset } from "react-scroll-sense-header";
 import "./App.css";
 import "react-scroll-sense-header/dist/styles.css";
 
-function App() {
-  const [behavior, setBehavior] = useState("hide-on-scroll");
-  const [boxShadow, setBoxShadow] = useState("medium");
-  const [transitionDuration, setTransitionDuration] = useState(300);
-  const [backgroundColor, setBackgroundColor] = useState("#667eea");
-  const headerRef = useRef(null);
+interface BehaviorOption {
+  value: HeaderBehavior;
+  label: string;
+  description: string;
+}
+
+interface BoxShadowOption {
+  value: BoxShadowPreset;
+  label: string;
+}
+
+function App(): JSX.Element {
+  const [behavior, setBehavior] = useState<HeaderBehavior>("hide-on-scroll");
+  const [boxShadow, setBoxShadow] = useState<BoxShadowPreset>("medium");
+  const [transitionDuration, setTransitionDuration] = useState<number>(300);
+  const [backgroundColor, setBackgroundColor] = useState<string>("#667eea");
+  const headerRef = useRef<ScrollSenseHeaderRef>(null);
 
   // Update CSS custom property for transition duration
   useEffect(() => {
     document.documentElement.style.setProperty('--transition-duration', `${transitionDuration}ms`);
   }, [transitionDuration]);
 
-  const behaviorOptions = [
+  const behaviorOptions: BehaviorOption[] = [
     { 
       value: "hide-on-scroll", 
       label: "Hide on Scroll", 
@@ -33,26 +45,26 @@ function App() {
     }
   ];
 
-  const boxShadowOptions = [
+  const boxShadowOptions: BoxShadowOption[] = [
     { value: "none", label: "None" },
     { value: "light", label: "Light" },
     { value: "medium", label: "Medium" },
     { value: "heavy", label: "Heavy" }
   ];
 
-  const handleBehaviorChange = (value) => {
+  const handleBehaviorChange = (value: HeaderBehavior): void => {
     setBehavior(value);
   };
 
-  const handleBoxShadowChange = (value) => {
+  const handleBoxShadowChange = (value: BoxShadowPreset): void => {
     setBoxShadow(value);
   };
 
-  const handleTransitionDurationChange = (value) => {
+  const handleTransitionDurationChange = (value: string): void => {
     setTransitionDuration(parseInt(value));
   };
 
-  const handleBackgroundColorChange = (value) => {
+  const handleBackgroundColorChange = (value: string): void => {
     setBackgroundColor(value);
   };
 
@@ -65,7 +77,7 @@ function App() {
         boxShadow={boxShadow}
         transitionDuration={transitionDuration}
         backgroundColor={backgroundColor}
-        onScrollStateChange={(isSticky, isHidden) => {
+        onScrollStateChange={(isSticky: boolean, isHidden: boolean) => {
           console.log('Header state:', { isSticky, isHidden });
         }}
       >
@@ -111,7 +123,7 @@ function App() {
                     name="behavior"
                     value={option.value}
                     checked={behavior === option.value}
-                    onChange={(e) => handleBehaviorChange(e.target.value)}
+                    onChange={(e) => handleBehaviorChange(e.target.value as HeaderBehavior)}
                   />
                   <label htmlFor={`behavior-${option.value}`} className="radio-label">
                     <strong>{option.label}</strong>
@@ -132,7 +144,7 @@ function App() {
                     name="boxShadow"
                     value={option.value}
                     checked={boxShadow === option.value}
-                    onChange={(e) => handleBoxShadowChange(e.target.value)}
+                    onChange={(e) => handleBoxShadowChange(e.target.value as BoxShadowPreset)}
                   />
                   <label htmlFor={`shadow-${option.value}`} className="radio-label">
                     {option.label}
